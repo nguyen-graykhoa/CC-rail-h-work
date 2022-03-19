@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogOnRails</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+  <%= render 'navigation' %>
+  <hr />
+     <nav>
+      <%= link_to 'Posts Index Page', posts_path %>
+      <%= link_to 'New Post Page', posts_new_path%>
+    </nav>
+
+    <%if(user_signed_in?) %>
+    <% session[:user_id] = current_user.id %>
+      <h2>Hello <%= link_to "#{current_user.full_name}", edit_user_path(current_user) %></h2>
+      <%= button_to "Log out", session_path(:user_id), method: :delete %>
+    <% else %>
+      <%= link_to 'Sign In Page', sessions_new_path%>
+      <%= link_to 'Sign Up Page', new_user_path%>
+    <% end %>
+
+   <% flash.each do |type, message| %>
+      <%= type + "-------" + message %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

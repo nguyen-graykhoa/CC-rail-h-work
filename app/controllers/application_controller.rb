@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     def authenticate_user!       
         if !user_signed_in?
             flash.notice = "Please sign in first!"
-            redirect_to new_sessions_path
+            redirect_to sessions_new_path
         end
     end    
 

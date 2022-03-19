@@ -11,14 +11,71 @@
   </head>
 
   <body>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
 
-    <%if(user_signed_in?) %>
-      <h2>Hello <%= link_to "#{current_user.full_name}", edit_user_path(current_user) %></h2>
-      <%= button_to "Log out", sessions_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Sign In Page', new_sessions_path%>
-      <%= link_to 'Sign Up Page', new_user_path%>
-    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+           <a class="nav-link navbar-brand" aria-current="page" href="<%= home_path %>">BlogOnRails</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="<%= home_path %>">Home</a>
+        </li>
+
+ 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Posts
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% if(user_signed_in?)  %>
+            <%= link_to "Create New Post", posts_new_path, class: "dropdown-item" %>
+          <% else %>  
+             <%= link_to "Sign In", sessions_new_path, class: "dropdown-item" %>
+             <%= link_to "Sign Up", new_user_path, class: "dropdown-item" %>
+          <% end %>  
+          <%= link_to "View Posts", home_path, class: "dropdown-item" %>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+           <% if(user_signed_in?) %>
+            <a class="nav-link" href="#">Current User: <%= current_user.full_name %></a>
+           <% end %> 
+        </li>
+
+ 
+
+        <li class="nav-item">
+          <% if(user_signed_in?) %>
+            <% session[:user_id] = current_user.id %>
+            
+            <%= button_to "Log out", session_path(:user_id), class:"nav-link btn btn-outline-info", method: :delete %>
+          <% else %>  
+            <li class="nav-item" style="margin-right: 10px;"><a class="nav-link btn btn-outline-info btn-sm" href="<%= sessions_new_path %>"> Sign In Page</a></li>
+            <li class="nav-item"><a class="nav-link btn btn-outline-info btn-sm" href="<%= new_user_path %>"> Sign Up Page</a></li>
+          <% end %>
+        </li>
+
+ 
+ 
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <hr />
+ 
+
+ 
 
    <% flash.each do |type, message| %>
       <%= type + "-------" + message %>
