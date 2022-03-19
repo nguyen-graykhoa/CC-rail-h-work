@@ -25,10 +25,23 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
+    else
+      render :edit, status: 303
+    end
+  end
+
   def show
     @post = Post.find params[:id]
     @comments = @post.comments
     @comment = Comment.new
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to posts_index_path
   end
 
   private

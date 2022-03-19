@@ -11,12 +11,14 @@
     <div>
         <%= form.label :title %>
         <br>
-        <%= form.text_field :title %>
+        <%= form.text_field :title, class: 'form-control' %>
     </div>
     <div>
         <%= form.label :body %>
         <br>
-        <%= form.text_area :body, cols: 50, rows: 5 %>
+        <%= form.text_area :body, class: 'form-control' ,cols: 50, rows: 5 %>
     </div>
-    <%= form.submit %>
+    <div class="mt-2">
+        <%= form.submit %>
+    </div>
 <% end %>
