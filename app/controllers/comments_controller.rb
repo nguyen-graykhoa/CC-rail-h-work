@@ -16,10 +16,11 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find params[:id]
+    @post = @comment.post
 
     if can?(:crud, @comment)
       @comment.destroy
-      redirect_to post_path(@post.comment)
+      redirect_to post_path(@post)
     else
       redirect_to root_path, alert: "Not Authorized"
     end

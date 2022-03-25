@@ -40,14 +40,14 @@
              <%= link_to "Sign Up", new_user_path, class: "dropdown-item" %>
           <% end %>  
           <%= link_to "View Posts", home_path, class: "dropdown-item" %>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <%# <li><hr class="dropdown-divider"></li> %>
+            <%# <li><a class="dropdown-item" href="#">Something else here</a></li> %>
           </ul>
         </li>
 
         <li class="nav-item">
            <% if(user_signed_in?) %>
-            <a class="nav-link" href="#">Current User: <%= current_user.full_name %></a>
+            <a class="nav-link" href="<%= edit_user_path(current_user.id) %>">Current User: <%= current_user.full_name %></a>
            <% end %> 
         </li>
 
