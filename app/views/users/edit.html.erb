@@ -1,5 +1,6 @@
 
-<h1>Edit User Profile</h1>
+<h1 class="text-center">Edit User Profile</h1>
+<div>
 <% if @user.errors.any? %>
     <p><%= @user.errors.full_messages.join(', ') %> </p>
 <% end %>

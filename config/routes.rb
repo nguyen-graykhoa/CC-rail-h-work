@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :users
+  resources :users do
+    get 'edit_password', to: 'users#edit_password', as: 'edit_password'
+    patch 'update_password', to: 'users#update_password', as: 'update_password'
+  end
+
 
   resources :sessions, only: [:new, :destroy, :create]
    

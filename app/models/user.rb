@@ -4,8 +4,12 @@ class User < ApplicationRecord
     has_many :posts, dependent: :destroy
     has_many :comments, dependent: :destroy
 
-    validates :email, presence: true, uniqueness: true
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
     
+     
+
+
     def full_name
         self.first_name + " " + self.last_name
     end
